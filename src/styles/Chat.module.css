@@ -1,0 +1,13 @@
+.col-left{
+    
+}
+.col-right{
+    background-color: #FAFAFA;
+    padding-right:  0 !important;
+    padding-left:  0 !important;
+    height: 100vh;
+    width: 100%;
+    overflow-y: auto ;
+    
+}
+
