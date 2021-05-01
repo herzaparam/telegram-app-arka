@@ -1,5 +1,7 @@
 const initialState = {
     profilePage: false,
+    chatTab: {},
+    chatDisplay: false
 };
 const toggleReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -12,6 +14,14 @@ const toggleReducer = (state = initialState, action) => {
             return {
                 ...state,
                 profilePage: false
+            }
+        case "OPEN_CHAT_TAB":
+            return {
+                ...state,
+                chatTab: {
+                    ...action.payload
+                },
+                chatDisplay: true
             }
         default:
             return state;

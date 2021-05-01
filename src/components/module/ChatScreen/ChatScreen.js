@@ -1,26 +1,31 @@
-import React from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+
 
 import styles from './ChatScreen.module.css'
-import { profileTest, profileMenu, faceIcon, squareIcon, plusIcon } from '../../../assets/image'
+import { profileMenu, faceIcon, squareIcon, plusIcon } from '../../../assets/image'
 import { showProfile } from '../../../configs/redux/actions/toggle'
 
 function ChatScreen() {
+ 
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
+    // const { chatTab, chatDisplay } = useSelector((state) => state.togglePage);
+    // const { userSelected } = chatTab;
+  
 
     return (
         <>
             <div className={styles["head-chat"]}>
                 <div className={styles["gr-1"]}>
-                    <img src={profileTest} alt="" />
+                    <img src='' alt="" />
                     <div className={styles["gr-1-pro"]}>
-                        <h4>theressa alice</h4>
+                        <h4>name</h4>
                         <p>online</p>
                     </div>
                 </div>
                 <div className={styles["gr-2"]}>
-                    <button onClick={(e) => dispatch(showProfile())}><img src={profileMenu} alt="" /></button>
+                    {/* <button onClick={(e) => dispatch(showProfile())}><img src={profileMenu} alt="" /></button> */}
                 </div>
 
             </div>
@@ -83,6 +88,9 @@ function ChatScreen() {
                 </div>
             </div>
         </>
+
+
+
 
     )
 }

@@ -4,8 +4,19 @@
     align-items: stretch;
     height: 4em;
 }
+.group:hover{
+    cursor: pointer;
+}
 .group-1{
     flex-basis: 25%;
+    padding: 10px;
+}
+.group-1 > img {
+    width: 80%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    margin: auto;
 }
 .group-2{
     flex-basis: 60%;

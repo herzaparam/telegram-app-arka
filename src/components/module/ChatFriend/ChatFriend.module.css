@@ -86,8 +86,8 @@ button.btn{
     cursor: pointer;
     border-radius: 35px 10px 35px 35px;
 }
-.list li {
-
+.listItem{
+    margin-left: 32px;
 }
 .list img {
     width: 20px;
@@ -101,6 +101,10 @@ button.btn{
     border: none;
     color: white;
     font-size: 18px;
-    align-self: center;
+    align-self: flex-end;
+}
+.list li:hover {
+    background-color: #496dd1;
+    border-radius: 10px;
 }
 

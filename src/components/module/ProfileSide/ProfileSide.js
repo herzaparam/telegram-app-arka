@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { updateUser } from '../../../configs/redux/actions/user'
@@ -8,7 +8,6 @@ import axiosApiInstance from '../../../helpers/axios'
 import styles from './ProfileSide.module.css'
 import { back, deviceIcon, graphIcon, chatIcon, bellIcon, lockIcon, settingIcon } from '../../../assets/image'
 import Swal from 'sweetalert2'
-import axios from 'axios'
 
 function ProfileSide() {
     const dispatch = useDispatch();

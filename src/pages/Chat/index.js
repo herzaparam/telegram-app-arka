@@ -7,9 +7,11 @@ import ProfileSide from '../../components/module/ProfileSide/ProfileSide'
 
 import styles from '../../styles/Chat.module.css'
 
+
 function Chat() {
 
     const { profilePage } = useSelector((state) => state.togglePage)
+        
 
     return (
         <div className="container-fluid">
@@ -22,7 +24,7 @@ function Chat() {
                     }
                 </div>
                 <div className={[["col-md-9"], styles["col-right"]].join(" ")}>
-                    <ChatScreen />
+                   
                 </div>
             </div>
         </div>

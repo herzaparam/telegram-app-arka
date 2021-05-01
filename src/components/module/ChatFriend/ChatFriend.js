@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { showProfile } from '../../../configs/redux/actions/toggle'
+import axiosApiInstance from '../../../helpers/axios'
+import { Link } from 'react-router-dom'
 
 import styles from './ChatFriend.module.css'
 import { plusIcon, searchIcon, bugerMenu, settingIcon, callIcon, contactIcon, faqIcon, saveIcon, inviteIcon } from '../../../assets/image'
@@ -14,12 +16,26 @@ function ChatFriend() {
 
     const [display, setDisplay] = useState(1);
     const [dispToggle, setDispToggle] = useState(false);
+    const [keyword, setKeyword] = useState("")
+    const [friends, setFriends] = useState([]);
 
     const handleLogout = (e) => {
         e.preventDefault();
         localStorage.removeItem("token")
-        history.push("/login")
+        history.push("/")
     }
+
+    useEffect(() => {
+        const urlApi = process.env.REACT_APP_API_URL;
+        axiosApiInstance.get(`${urlApi}/users/find-all?page=1&perPage=10&keyword=${keyword}`)
+            .then((res) => {
+                const newFriends = res.data.data;
+                setFriends(newFriends)
+            })
+            .catch((err) => {
+
+            });
+    }, [keyword])
 
     return (
         <>
@@ -36,7 +52,7 @@ function ChatFriend() {
                     <li><img src={saveIcon} alt="" /><button>Save Messages</button></li>
                     <li><img src={inviteIcon} alt="" /><button>Invite Friends</button></li>
                     <li><img src={faqIcon} alt="" /><button>Telegram FAQ</button></li>
-                    <li><button onClick={handleLogout}>Log out</button></li>
+                    <li className={styles.listItem}><button onClick={handleLogout}>Log out</button></li>
                 </ul>
                 :
                 <></>
@@ -45,7 +61,7 @@ function ChatFriend() {
             <div className={styles["search-group"]}>
                 <div className={styles["search-group-inpt"]}>
                     <button><img src={searchIcon} alt="" /></button>
-                    <input type="text" placeholder="Type your message" />
+                    <input type="text" placeholder="Type your message" onChange={(e) => setKeyword(e.target.value)} />
                 </div>
                 <button><img src={plusIcon} alt="" /></button>
             </div>
@@ -56,7 +72,14 @@ function ChatFriend() {
             </div>
 
             <div className={display === 1 ? styles["friend-group-active"] : styles["friend-group"]}>
-                <CardFriend />
+                {friends.map((person) => {
+                    return (
+                        <Link onClick={e => (!person.userID || !person.name) ? e.preventDefault() : null} to={`/chat-room?id=${person.userID}`} key={person.userID}>
+                            <CardFriend person={person}  />
+                        </ Link>
+                    )
+                })}
+
             </div>
             <div className={display === 2 ? styles["friend-group-active"] : styles["friend-group"]}>
                 <p>none</p>
