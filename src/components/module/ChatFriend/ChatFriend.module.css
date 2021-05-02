@@ -81,7 +81,7 @@ button.btn{
     left: 85px;
     right: 0;
     bottom: 0;
-    background-color: #7E98DF;
+    background-color: rgb(126,152,223, 0.9);
     z-index: 2;
     cursor: pointer;
     border-radius: 35px 10px 35px 35px;
@@ -102,9 +102,25 @@ button.btn{
     color: white;
     font-size: 18px;
     align-self: flex-end;
+    position: relative;
+    top: 5px;
+    left: 10px;
+}
+.list li {
+    padding: 5px 10px;
 }
 .list li:hover {
     background-color: #496dd1;
     border-radius: 10px;
 }
-
+.friend-group-active-a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+}
+.friend-group-active-a > h2{
+    font-size: 32px;
+    font-weight: 700;
+    color: #7E98DF;
+}

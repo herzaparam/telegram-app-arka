@@ -60,6 +60,7 @@
     border: none;
     height: 3em;
     margin: 1em 0;
+    align-items: flex-start;
 }
 .form > a {
     align-self: flex-end;
@@ -117,4 +118,9 @@ p.red{
 }
 .line > hr {
     flex-grow: 2;
+}
+button.btn-special {
+    width: min-content;
+    background: none;
+    margin-right: auto;
 }

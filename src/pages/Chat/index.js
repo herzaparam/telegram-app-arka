@@ -2,7 +2,6 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 
 import ChatFriend from '../../components/module/ChatFriend/ChatFriend'
-import ChatScreen from '../../components/module/ChatScreen/ChatScreen'
 import ProfileSide from '../../components/module/ProfileSide/ProfileSide'
 
 import styles from '../../styles/Chat.module.css'

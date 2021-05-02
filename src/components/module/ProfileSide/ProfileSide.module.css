@@ -43,7 +43,8 @@ h4, h5, p{
 .pro-info-1 > img {
     width: 60px;
     height: 60px;
-    object-fit: contain;
+    object-fit: cover;
+    border-radius: 14px;
 }
 .pro-info-1 > h4 {
     margin-bottom: 0;
@@ -148,7 +149,8 @@ button.setting-img{
 .label img {
     width: 60px;
     height: 60px;
-    object-fit: contain;
+    object-fit: cover;
+    border-radius: 14px;
 }
 .label > img:hover {
     cursor: pointer;

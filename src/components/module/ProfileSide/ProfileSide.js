@@ -46,9 +46,10 @@ function ProfileSide() {
             image: e.target.files[0]
         })
     };
-
+    
     const handleSubmit = (e) => {
         e.preventDefault();
+        
         const formData = new FormData();
         formData.append("name", update.name)
         formData.append("username", update.username)
@@ -84,7 +85,7 @@ function ProfileSide() {
                 });
             })
     }
-    
+
     return (
         <div className={styles["pro"]}>
             <div className={styles["pro-head"]}>

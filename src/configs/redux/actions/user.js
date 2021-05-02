@@ -50,6 +50,7 @@ export const login = (data) => (dispatch) => {
             .then((res) => {
                 dispatch({ type: "LOGIN", payload: res.data.data });
                 localStorage.setItem("token", res.data.data.token);
+                localStorage.setItem("idLoggedIn", res.data.data.userID)
                 resolve(res.data.message);
             })
             .catch((err) => {

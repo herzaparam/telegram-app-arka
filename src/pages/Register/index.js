@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {  useHistory, useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { signUp, verify } from "../../configs/redux/actions/user";
 
@@ -92,7 +92,7 @@ function Register() {
     return (
         <div className={[["container-fluid"], styles["cont-fluid"]].join(' ')}>
             <div className={styles["form"]}>
-                <button onClick={(e) => { history.goBack() }}>
+                <button className={styles["btn-special"]} onClick={(e) => { history.goBack() }}>
                     <img src={back} alt="" />
                 </button>
                 <h2>Register</h2>

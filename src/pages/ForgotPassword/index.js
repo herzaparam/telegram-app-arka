@@ -131,7 +131,7 @@ function ForgotPassword() {
     return (
         <div className={[["container-fluid"], styles["cont-fluid"]].join(' ')}>
             <div className={styles["form"]}>
-                <button onClick={(e) => history.goBack()}>
+                <button className={styles["btn-special"]} onClick={(e) => history.goBack()}>
                     <img src={back} alt="" />
                 </button>
                 <h2>Forgot Password</h2>

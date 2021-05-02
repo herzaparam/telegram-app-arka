@@ -22,6 +22,7 @@ function ChatFriend() {
     const handleLogout = (e) => {
         e.preventDefault();
         localStorage.removeItem("token")
+        localStorage.removeItem("idLoggedIn")
         history.push("/")
     }
 
@@ -57,7 +58,6 @@ function ChatFriend() {
                 :
                 <></>
             }
-
             <div className={styles["search-group"]}>
                 <div className={styles["search-group-inpt"]}>
                     <button><img src={searchIcon} alt="" /></button>
@@ -74,19 +74,18 @@ function ChatFriend() {
             <div className={display === 1 ? styles["friend-group-active"] : styles["friend-group"]}>
                 {friends.map((person) => {
                     return (
-                        <Link onClick={e => (!person.userID || !person.name) ? e.preventDefault() : null} to={`/chat-room?id=${person.userID}`} key={person.userID}>
-                            <CardFriend person={person}  />
+                        <Link onClick={e => (!person.userID || !person.name) ? e.preventDefault() : null} to={`/chat-room?id=${person.userID}`} key={person.userID} style={{ textDecoration: 'none' }}>
+                            <CardFriend person={person} />
                         </ Link>
                     )
                 })}
 
             </div>
-            <div className={display === 2 ? styles["friend-group-active"] : styles["friend-group"]}>
-                <p>none</p>
+            <div className={display === 2 ? styles["friend-group-active-a"] : styles["friend-group"]}>
+                <h2>none</h2>
             </div>
-            <div className={display === 3 ? styles["friend-group-active"] : styles["friend-group"]}>
-
-                <p>none</p>
+            <div className={display === 3 ? styles["friend-group-active-a"] : styles["friend-group"]}>
+                <h2>none</h2>
             </div>
         </>
     )
