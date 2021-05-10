@@ -26,24 +26,26 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
+---
 ## Preview
 Here's some preview from my website :
 
 1. **Login Page**, first you need to register and login in this page.
 
-[Login Page](https://github.com/herzaparam/telegram-app-arka/blob/master/src/assets/image/login.png)
+![Login Page](https://github.com/herzaparam/telegram-app-arka/blob/master/src/assets/image/login.png)
 
 2. **Main Chat**, you can select other user to private chat
 
-[Main chat](https://github.com/herzaparam/telegram-app-arka/blob/master/src/assets/image/chat-room.png)
+![Main chat](https://github.com/herzaparam/telegram-app-arka/blob/master/src/assets/image/chat-room.png)
 
 3. **Settings**, there are some menu to adjust user preference.
 
-[Settings](https://github.com/herzaparam/telegram-app-arka/blob/master/src/assets/image/setting.png)
+![Settings](https://github.com/herzaparam/telegram-app-arka/blob/master/src/assets/image/setting.png)
 
 4. **Edit Profile**, you can change your personal information here.
 
-[Edit Profile](https://github.com/herzaparam/telegram-app-arka/blob/master/src/assets/image/edit%20profile.png)
+![Edit Profile](https://github.com/herzaparam/telegram-app-arka/blob/master/src/assets/image/edit%20profile.png)
+---
 
 ### Deployment
 
