@@ -50,7 +50,7 @@ Here's some preview from my website :
 
 ### Deployment
 
-This section has moved here: [https://telegram-app-arka.netlify.app/](https://telegram-app-arka.netlify.app/)
+visit the website here: [https://telegram-app-arka.netlify.app/](https://telegram-app-arka.netlify.app/)
 
 ### Also
-you can check our backend repositories [here](https://github.com/herzaparam/telegram-api-arka)
+you can check the backend repositories [here](https://github.com/herzaparam/telegram-api-arka)
