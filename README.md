@@ -11,11 +11,12 @@ The website-based chat app, developed using socket.io, react.js, and express.js.
 - axios
 - bootstrap
 
-## Get Startes
+## Get Started
 
 In the project directory, you can run:
 
-###  first time? `npm install`
+###  first time? install some packages  
+    `npm install`
 
 ### `npm start`
 
