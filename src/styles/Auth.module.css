@@ -1,3 +1,4 @@
+
 .cont-fluid{
     background-color: #E5E5E5;
     display: flex;
@@ -97,8 +98,8 @@ button.grey:hover {
     font-size: 20px;
     line-height: 30px;
     color: #232323;
-    
 }
+
 .group-inpt-red {
     border: none;
     border-bottom: 1.5px solid red;
@@ -123,4 +124,7 @@ button.btn-special {
     width: min-content;
     background: none;
     margin-right: auto;
+}
+.group-span {
+    display: flex;
 }

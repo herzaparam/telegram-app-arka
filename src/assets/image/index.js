@@ -18,6 +18,7 @@ import faqIcon from './faq icon.png'
 import callIcon from './call icon.png'
 import contactIcon from './contact icon.png'
 import saveIcon from './save messages icon.png'
+import passwordEye from './passwordeye.png'
 
 export {
     back,
@@ -39,6 +40,7 @@ export {
     contactIcon,
     faqIcon,
     callIcon,
-    inviteIcon
+    inviteIcon,
+    passwordEye
 
 }

@@ -27,7 +27,7 @@ function ChatRoom({ location }) {
     const [socket, setSocket] = useState(null);
     const [message, setMessage] = useState("")
     const [comingMessage, setComingMessage] = useState([])
-
+    console.log(comingMessage);
     const notify = () => toast.info('✅ sent!', {
         position: "top-right",
         autoClose: 2000,
@@ -77,12 +77,11 @@ function ChatRoom({ location }) {
     useEffect(() => {
         if (socket) {
             socket.on("receiveMessage", (data) => {
-                setComingMessage([...comingMessage, data])
-
+                setComingMessage([...comingMessage,data])
             })
         }
 
-    }, [socket, comingMessage])
+    }, [ socket, comingMessage])
 
     const handleClick = (e) => {
         e.preventDefault();
@@ -95,7 +94,7 @@ function ChatRoom({ location }) {
             setComingMessage([...comingMessage, data])
         })
         setMessage("")
-        notify()
+       
     };
 
     return (
@@ -143,6 +142,7 @@ function ChatRoom({ location }) {
                                         <li className={styles["msg-rec"]} > {item.message} <span className={styles.spanlist}><p>{item.time}</p></span>  </li>
                                         {user.image === undefined ? <img src={`${urlImg}${newUser.image}`} alt="img profile"></img> : <img src={`${urlImg}${user.image}`} alt="img profile"></img>}
                                     </div>
+                                    
                                     :
                                     item.idReceiver === localStorage.getItem('idLoggedIn') && userSelected.userID === item.idSender ?
                                         <div className={styles["cont-msg-send"]} key={index}>

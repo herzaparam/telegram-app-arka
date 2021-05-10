@@ -5,7 +5,8 @@ import { activate, reset } from '../../configs/redux/actions/user'
 
 import Swal from 'sweetalert2'
 import styles from '../../styles/Auth.module.css'
-import { back } from '../../assets/image'
+import { back, passwordEye } from '../../assets/image'
+import VisibilityIcon from '@material-ui/icons/Visibility';
 
 function ForgotPassword() {
     const useQuery = () => new URLSearchParams(useLocation().search);
@@ -24,8 +25,9 @@ function ForgotPassword() {
         confirmpassword: ""
     });
     const [step, setStep] = useState("send");
-    const [hasError, setHasError] = useState(false)
-    console.log(hasError);
+    const [hasError, setHasError] = useState(false);
+    const [errorPassword, setErrorPassword] = useState(false);
+
     const handleFormChange = (event) => {
         const dataNew = { ...data };
         dataNew[event.target.name] = event.target.value;
@@ -63,15 +65,10 @@ function ForgotPassword() {
 
     const validate = (event) => {
         event.preventDefault();
+        setHasError(false)
+        setErrorPassword(false)
         if (data.password !== data.confirmpassword) {
-            Swal.fire({
-                title: "Error!",
-                text: "password and confirmation not same",
-                icon: "error",
-                confirmButtonText: "Ok",
-                confirmButtonColor: "#6a4029",
-            });
-            return;
+            return setErrorPassword(true);
         }
         if (data.email !== email) {
             return setHasError(true);
@@ -153,12 +150,13 @@ function ForgotPassword() {
                     </>
                 }
 
-                {step !== "send" ?
+                {step === "reset" ?
                     <>
                         <div className={styles["group-inpt"]}>
                             <label htmlFor="">password</label>
                             <input type="password" name="password" onChange={handleFormChange} />
                         </div>
+                        {errorPassword === true ? <p className={styles["red"]}>invalid password confirmation</p> : ""}
                         <div className={styles["group-inpt"]}>
                             <label htmlFor="">confirmation password</label>
                             <input type="password" name="confirmpassword" onChange={handleFormChange} />
