@@ -174,34 +174,17 @@ function ChatRoom({ socket }) {
                         </div>
                         <div className={styles["main-chat"]}>
                             <ul>
-                                {/* {chatHistory &&
-                                    chatHistory.map((item, index) => {
-                                        return item.id_receiver === userSelected.userID ?
-                                            <div className={styles["cont-msg-rec"]} key={index}>
-                                                <li onClick={(e) => deleteMessage(item.id_message)} className={styles["msg-rec"]} > {item.message} <span className={styles.spanlist}><p>{item.createdAt}</p></span>  </li>
-                                                {user.image === undefined ? <img src={`${urlImg}${newUser.image}`} alt="img profile"></img> : <img src={`${urlImg}${user.image}`} alt="img profile"></img>}
-                                            </div>
-                                            :
-                                            item.id_receiver === localStorage.getItem('idLoggedIn') && userSelected.userID === item.id_sender ?
-                                                <div className={styles["cont-msg-send"]} key={index}>
-                                                    <img src={`${urlImg}${userSelected.image}`} alt="img profile"></img>
-                                                    <li onClick={(e) => deleteMessage(item.id_message)} className={styles["msg-send"]} > {item.message} <span className={styles.spanlist}><p>{item.createdAt}</p></span>  </li>
-                                                </div>
-                                                :
-                                                ""
-                                    })
-                                } */}
                                 {comingMessage.map((item, index) => {
-                                    return item.id_receiver === userSelected.userID ?
+                                    return item.id_receiver === userSelected.userID && item.id_sender === localStorage.getItem('idLoggedIn') ?
                                         <div className={styles["cont-msg-rec"]} key={index}>
-                                            <li className={styles["msg-rec"]} > {item.message} <span className={styles.spanlist}><p>{item.time}</p></span>  </li>
+                                            <li className={styles["msg-rec"]} > {item.message} <span className={styles.spanlist}><p>{item.createdAt} </p></span>  </li>
                                             {user.image === undefined ? <img src={`${urlImg}${newUser.image}`} alt="img profile"></img> : <img src={`${urlImg}${user.image}`} alt="img profile"></img>}
                                         </div>
                                         :
                                         item.id_receiver === localStorage.getItem('idLoggedIn') && userSelected.userID === item.id_sender ?
                                             <div className={styles["cont-msg-send"]} key={index}>
                                                 <img src={`${urlImg}${userSelected.image}`} alt="img profile"></img>
-                                                <li className={styles["msg-send"]} > {item.message} <span className={styles.spanlist}><p>{item.time}</p></span>  </li>
+                                                <li className={styles["msg-send"]} > {item.message} <span className={styles.spanlist}><p>{item.createdAt}</p></span>  </li>
                                             </div>
                                             :
                                             ""

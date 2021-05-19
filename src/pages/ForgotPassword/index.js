@@ -93,9 +93,9 @@ function ForgotPassword() {
                         confirmButtonColor: "#ffba33",
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            history.push("/login");
+                            history.push("/");
                         } else {
-                            history.push("/login");
+                            history.push("/");
                         }
                     });
                 })

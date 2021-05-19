@@ -71,9 +71,9 @@ function Register() {
                         confirmButtonColor: "#7e98df",
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            history.push("/login");
+                            history.push("/");
                         } else {
-                            history.push("/login");
+                            history.push("/");
                         }
                     });
                 })
