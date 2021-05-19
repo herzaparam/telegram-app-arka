@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { updateUser } from '../../../configs/redux/actions/user'
+import { updateUser, getUserLogin } from '../../../configs/redux/actions/user'
 import { closeProfile } from '../../../configs/redux/actions/toggle'
 import axiosApiInstance from '../../../helpers/axios'
 
@@ -17,7 +17,7 @@ function ProfileSide() {
 
     const [update, setUpdate] = useState({
         name: "",
-        phone_number: 0,
+        phone_number: "",
         username: "",
         bio: "",
         image: null
@@ -46,15 +46,15 @@ function ProfileSide() {
             image: e.target.files[0]
         })
     };
-    
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        
+
         const formData = new FormData();
-        formData.append("name", update.name)
-        formData.append("username", update.username)
-        formData.append("phone_number", update.phone_number)
-        formData.append("bio", update.bio)
+        formData.append("name", update.name ? update.name : user.name)
+        formData.append("username", update.username ? update.username : user.username)
+        formData.append("phone_number", update.phone_number ? update.phone_number : user.phone_number)
+        formData.append("bio", update.bio ? update.bio : user.bio)
         formData.append("image", update.image)
         axiosApiInstance.put(`${apiUrl}/users/update-profile`, formData)
             .then(async (res) => {
@@ -67,7 +67,7 @@ function ProfileSide() {
                 })
                 setUpdate({
                     name: "",
-                    phone_number: 0,
+                    phone_number: "",
                     username: "",
                     bio: "",
                     image: null
@@ -78,7 +78,7 @@ function ProfileSide() {
             .catch((err) => {
                 Swal.fire({
                     title: "Error!",
-                    text: err.message,
+                    text: err.response.data.message,
                     icon: "error",
                     confirmButtonText: "Ok",
                     confirmButtonColor: "#6a4029",
@@ -128,7 +128,7 @@ function ProfileSide() {
                 <form className={styles["form"]}>
                     <div className={styles["pro-info-1"]}>
                         <img src={`${urlImage}${user.image}`} alt="" />
-                        <h4>{user.name}</h4>
+                        <h4>{user && user.name}</h4>
                         <p>username</p>
                     </div>
                     <div className={styles["pro-info-2"]}>

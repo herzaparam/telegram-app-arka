@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import qs from 'query-string'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useHistory } from 'react-router-dom'
 
 import ChatFriend from '../../components/module/ChatFriend/ChatFriend'
 import ProfileSide from '../../components/module/ProfileSide/ProfileSide'
@@ -20,6 +20,7 @@ function ChatRoom({ socket }) {
     const urlImg = process.env.REACT_APP_API_IMG;
     const urlApi = process.env.REACT_APP_API_URL;
     let location = useLocation()
+    const history = useHistory()
 
     const dispatch = useDispatch();
 
@@ -42,9 +43,10 @@ function ChatRoom({ socket }) {
     });
 
     const getChat = () => {
+        
         axiosApiInstance.get(`${urlApi}/chat/history`)
             .then((result) => {
-                setChatHistory(result.data.data)
+                setComingMessage(result.data.data)
             })
     }
 
@@ -76,23 +78,24 @@ function ChatRoom({ socket }) {
     }, [socket]);
 
     useEffect(() => {
-
         if (socket) {
             socket.off("receiveMessage")
             socket.on("receiveMessage", (data) => {
                 setComingMessage([...comingMessage, data])
                 notify(data.senderName);
             })
-
         }
-
     }, [socket, comingMessage])
+
+    useEffect(()=>{
+        getChat()
+    },[])
 
     const handleClick = (e) => {
         e.preventDefault();
         socket.emit('sendMessage', {
-            idReceiver: userSelected.userID,
-            idSender: localStorage.getItem('idLoggedIn'),
+            id_receiver: userSelected.userID,
+            id_sender: localStorage.getItem('idLoggedIn'),
             senderName: user.name || newUser.name,
             message: message
         }, (data) => {
@@ -130,6 +133,7 @@ function ChatRoom({ socket }) {
             }
         })
     }
+
     return (
 
         <div className="container-fluid">
@@ -146,7 +150,7 @@ function ChatRoom({ socket }) {
             />
 
             <div className="row">
-                <div className={[["col-sm-3"], styles["col-left"]].join(" ")}>
+                <div className={location.search ? [["col-sm-3"], styles["col-left"]].join(" ") : "col-sm-3"}>
                     {profilePage === true ?
                         <ProfileSide />
                         :
@@ -165,12 +169,12 @@ function ChatRoom({ socket }) {
                                 </div>
                             </div>
                             <div className={styles["gr-2"]}>
-                                <button onClick={(e) => dispatch(showProfile())}><img src={profileMenu} alt="" /></button>
+                                <button onClick={(e) => history.push("/chat-room")}><img src={profileMenu} alt="" /></button>
                             </div>
                         </div>
                         <div className={styles["main-chat"]}>
                             <ul>
-                                {chatHistory &&
+                                {/* {chatHistory &&
                                     chatHistory.map((item, index) => {
                                         return item.id_receiver === userSelected.userID ?
                                             <div className={styles["cont-msg-rec"]} key={index}>
@@ -186,16 +190,15 @@ function ChatRoom({ socket }) {
                                                 :
                                                 ""
                                     })
-                                }
+                                } */}
                                 {comingMessage.map((item, index) => {
-                                    return item.idReceiver === userSelected.userID ?
+                                    return item.id_receiver === userSelected.userID ?
                                         <div className={styles["cont-msg-rec"]} key={index}>
                                             <li className={styles["msg-rec"]} > {item.message} <span className={styles.spanlist}><p>{item.time}</p></span>  </li>
                                             {user.image === undefined ? <img src={`${urlImg}${newUser.image}`} alt="img profile"></img> : <img src={`${urlImg}${user.image}`} alt="img profile"></img>}
                                         </div>
-
                                         :
-                                        item.idReceiver === localStorage.getItem('idLoggedIn') && userSelected.userID === item.idSender ?
+                                        item.id_receiver === localStorage.getItem('idLoggedIn') && userSelected.userID === item.id_sender ?
                                             <div className={styles["cont-msg-send"]} key={index}>
                                                 <img src={`${urlImg}${userSelected.image}`} alt="img profile"></img>
                                                 <li className={styles["msg-send"]} > {item.message} <span className={styles.spanlist}><p>{item.time}</p></span>  </li>

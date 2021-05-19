@@ -31,7 +31,6 @@ export const signUp = (data) => (dispatch) => {
         axios
             .post(`${url}/users/`, data)
             .then((res) => {
-                console.log(res);
                 dispatch(signUpSuccess(res.data.data));
                 resolve(res.data.message);
             })
@@ -58,6 +57,19 @@ export const login = (data) => (dispatch) => {
             });
     });
 };
+export const getUserLogin = () => (dispatch) => {
+    return new Promise((resolve, reject)=>{
+        const apiUrl = process.env.REACT_APP_API_URL;
+        axiosApiInstance.get(`${apiUrl}/users/find-one`)
+                .then((res) => {
+                    dispatch({ type: "GET_USER_LOGIN", payload: res.data.data})
+                    resolve(res.data.message)
+                })
+                .catch((err) => {
+                    reject(err.response.data.message);
+                })
+    })
+}
 
 export const verify = (email, token) => (dispatch) => {
     return new Promise((resolve, reject) => {

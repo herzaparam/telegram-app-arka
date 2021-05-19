@@ -128,3 +128,17 @@ button.btn-special {
 .group-span {
     display: flex;
 }
+@media (max-width: 575.98px) {
+    .cont-fluid {
+        padding: 0 !important;
+    }
+    .form {
+        min-height: 0;
+        min-width: 0;
+        height: 100%;
+        width: 100%;
+        border-radius: 0;
+        padding: 5em 2em;
+    }
+    
+}

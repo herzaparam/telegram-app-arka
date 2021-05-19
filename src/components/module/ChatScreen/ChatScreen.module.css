@@ -148,3 +148,26 @@
     margin-bottom: 0;
     line-height: 15px;
 }
+
+@media (max-width: 575.98px) {
+    .col-left {
+        display: none;
+    }
+    .head-chat {
+        width: 100%;
+    }
+    .foot-chat {
+        padding: 0 1em;
+    }
+    .chat-text input {
+        width: 70%;
+    }
+    .chat-text input::placeholder {
+        font-size: 18px;
+    }
+    .chat-text button {
+       margin-left: auto;
+        padding: 5px;
+        width: min-content;
+    }
+}
