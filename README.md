@@ -1,5 +1,5 @@
-# Telegram-app
-The website-based chat app, developed using socket.io, react.js, and express.js. After registration and login, users can private chat with other users or join group chats. Users can also change personal information.
+<h1 align="center">Telegram</h1>
+The website-based chat app, developed using socket.io, react.js, and express.js. After registration and login, users can private chat with other users or join group chats. Users can also change personal information such as phone number, profile picture, bio, name, and user name.
 
 ## Package 
 - redux
@@ -11,46 +11,59 @@ The website-based chat app, developed using socket.io, react.js, and express.js.
 - axios
 - bootstrap
 
-## Get Started
+## Getting Started
+
+### Prerequisites
+
+This is an example of how to list things you need to use the software and how to install them.
+
+* [nodejs](https://nodejs.org/en/download/)
+
+
+### Installation
+
+1. Clone the repo
+```sh
+git clone https://github.com/herzaparam/telegram-app-arka.git
+```
+2. Install NPM packages
+```sh
+npm install
+```
+3. Add .env file at root folder project, and add following
+```sh
+REACT_APP_API_URL=[Backend API]
+REACT_APP_API_IMG=[url backend images]
+```
 
 In the project directory, you can run:
-
-###  first time? install some packages  
-    `npm install`
-
 ### `npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
 ---
 ## Preview
 Here's some preview from my website :
 
-1. **Login Page**, first you need to register and login in this page.
+<div align="center">
+  <img width="430" src="https://github.com/herzaparam/React-Tickitz/blob/main/src/assets/image/home.png" alt="Home page">
+  <img width="430" src="https://github.com/herzaparam/React-Tickitz/blob/main/src/assets/image/movie%20details.png" alt="Movie Details Page">
+  <img width="430" src="https://github.com/herzaparam/React-Tickitz/blob/main/src/assets/image/order.png" alt="Order Page">
+  <img width="430" src="https://github.com/herzaparam/React-Tickitz/blob/main/src/assets/image/payment.png" alt="Payment Page">
+</div>
 
-![Login Page](https://github.com/herzaparam/telegram-app-arka/blob/master/src/assets/image/login.png)
-
-2. **Main Chat**, you can select other user to private chat
-
-![Main chat](https://github.com/herzaparam/telegram-app-arka/blob/master/src/assets/image/chat-room.png)
-
-3. **Settings**, there are some menu to adjust user preference.
-
-![Settings](https://github.com/herzaparam/telegram-app-arka/blob/master/src/assets/image/setting.png)
-
-4. **Edit Profile**, you can change your personal information here.
-
-![Edit Profile](https://github.com/herzaparam/telegram-app-arka/blob/master/src/assets/image/edit%20profile.png)
 ---
 
-### Deployment
 
-visit the website here: [https://telegram-app-arka.netlify.app/](https://telegram-app-arka.netlify.app/)
+## Publication
+you can visit our website here : [https://telegram-app-arka.netlify.app/](https://telegram-app-arka.netlify.app/)
 
-### Also
-you can check the backend repositories [here](https://github.com/herzaparam/telegram-api-arka)
+## Back end Repositories
+visit [here](https://github.com/herzaparam/telegram-api-arka)
+
+## Contributor
+[Herza Paramayudhanto](https://github.com/herzaparam)
+
+contact :
+herzaparam@gmail.com
