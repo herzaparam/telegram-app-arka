@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import qs from 'query-string'
-import io from 'socket.io-client'
+import { useLocation } from 'react-router-dom'
 
 import ChatFriend from '../../components/module/ChatFriend/ChatFriend'
 import ProfileSide from '../../components/module/ProfileSide/ProfileSide'
@@ -13,22 +13,25 @@ import axios from 'axios'
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import axiosApiInstance from '../../helpers/axios'
+import Swal from 'sweetalert2'
 
 
-function ChatRoom({ location }) {
+function ChatRoom({ socket }) {
     const urlImg = process.env.REACT_APP_API_IMG;
-    const portsocket = 'http://localhost:8000'
+    const urlApi = process.env.REACT_APP_API_URL;
+    let location = useLocation()
+
     const dispatch = useDispatch();
 
     const { user } = useSelector((state) => state.user);
     const [newUser, setNewUser] = useState([]);
     const { profilePage } = useSelector((state) => state.togglePage);
     const [userSelected, setUserSelected] = useState([]);
-    const [socket, setSocket] = useState(null);
     const [message, setMessage] = useState("")
     const [comingMessage, setComingMessage] = useState([])
-    console.log(comingMessage);
-    const notify = () => toast.info('✅ sent!', {
+    const [chatHistory, setChatHistory] = useState([])
+
+    const notify = (senderName) => toast.info(`✅ You have unread message! from ${senderName}`, {
         position: "top-right",
         autoClose: 2000,
         hideProgressBar: false,
@@ -38,9 +41,14 @@ function ChatRoom({ location }) {
         progress: undefined,
     });
 
-    useEffect(() => {
-        const urlApi = process.env.REACT_APP_API_URL;
+    const getChat = () => {
+        axiosApiInstance.get(`${urlApi}/chat/history`)
+            .then((result) => {
+                setChatHistory(result.data.data)
+            })
+    }
 
+    useEffect(() => {
         if (user.image === undefined) {
             axiosApiInstance.get(`${urlApi}/users/find-one`)
                 .then((res) => {
@@ -52,19 +60,12 @@ function ChatRoom({ location }) {
                 })
         }
 
-
         const { id } = qs.parse(location.search)
-
         axios.get(`${urlApi}/users/find-byid/${id}`)
             .then((res) => {
                 setUserSelected(res.data.data[0])
+                getChat()
             })
-            .catch((err) => {
-                alert('cant get user selected')
-            })
-
-        const connectSocket = io(portsocket);
-        setSocket(connectSocket);
 
     }, [location])
 
@@ -75,28 +76,60 @@ function ChatRoom({ location }) {
     }, [socket]);
 
     useEffect(() => {
+
         if (socket) {
+            socket.off("receiveMessage")
             socket.on("receiveMessage", (data) => {
-                setComingMessage([...comingMessage,data])
+                setComingMessage([...comingMessage, data])
+                notify(data.senderName);
             })
+
         }
 
-    }, [ socket, comingMessage])
+    }, [socket, comingMessage])
 
     const handleClick = (e) => {
         e.preventDefault();
         socket.emit('sendMessage', {
             idReceiver: userSelected.userID,
             idSender: localStorage.getItem('idLoggedIn'),
-            idSocketSender: socket.id,
+            senderName: user.name || newUser.name,
             message: message
         }, (data) => {
             setComingMessage([...comingMessage, data])
         })
         setMessage("")
-       
-    };
+        axios.post(`${urlApi}/chat/insert`, {
+            id_sender: localStorage.getItem('idLoggedIn'),
+            id_receiver: userSelected.userID,
+            message: message
+        })
 
+    };
+    const deleteMessage = (id) => {
+        const idMessage = id
+        Swal.fire({
+            title: 'Do you want to delete this message?',
+            icon: 'warning',
+            showConfirmButton: false,
+            showDenyButton: true,
+            showCancelButton: true,
+            denyButtonText: `delete`,
+        }).then(async (result) => {
+            if (result.isDenied) {
+                try {
+                    const res = await axios.delete(`${urlApi}/chat/delete?idMessage=${idMessage}`)
+                } catch {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'internal server error!',
+                    })
+                }
+                getChat()
+            }
+        })
+    }
     return (
 
         <div className="container-fluid">
@@ -121,48 +154,67 @@ function ChatRoom({ location }) {
                     }
 
                 </div>
-                <div className={[["col-md-9"], styles["col-right"]].join(" ")}>
-                    <div className={styles["head-chat"]}>
-                        <div className={styles["gr-1"]}>
-                            <img src={`${urlImg}${userSelected.image}`} alt="" />
-                            <div className={styles["gr-1-pro"]}>
-                                <h4>{userSelected.name}</h4>
-                                <p>online</p>
+                {location.search &&
+                    <div className={[["col-md-9"], styles["col-right"]].join(" ")}>
+                        <div className={styles["head-chat"]}>
+                            <div className={styles["gr-1"]}>
+                                <img src={`${urlImg}${userSelected.image}`} alt="" />
+                                <div className={styles["gr-1-pro"]}>
+                                    <h4>{userSelected.name}</h4>
+                                    <p>online</p>
+                                </div>
+                            </div>
+                            <div className={styles["gr-2"]}>
+                                <button onClick={(e) => dispatch(showProfile())}><img src={profileMenu} alt="" /></button>
                             </div>
                         </div>
-                        <div className={styles["gr-2"]}>
-                            <button onClick={(e) => dispatch(showProfile())}><img src={profileMenu} alt="" /></button>
-                        </div>
-                    </div>
-                    <div className={styles["main-chat"]}>
-                        <ul>
-                            {comingMessage.map((item, index) => {
-                                return item.idReceiver === userSelected.userID ?
-                                    <div className={styles["cont-msg-rec"]} key={index}>
-                                        <li className={styles["msg-rec"]} > {item.message} <span className={styles.spanlist}><p>{item.time}</p></span>  </li>
-                                        {user.image === undefined ? <img src={`${urlImg}${newUser.image}`} alt="img profile"></img> : <img src={`${urlImg}${user.image}`} alt="img profile"></img>}
-                                    </div>
-                                    
-                                    :
-                                    item.idReceiver === localStorage.getItem('idLoggedIn') && userSelected.userID === item.idSender ?
-                                        <div className={styles["cont-msg-send"]} key={index}>
-                                            <img src={`${urlImg}${userSelected.image}`} alt="img profile"></img>
-                                            <li className={styles["msg-send"]} > {item.message} <span className={styles.spanlist}><p>{item.time}</p></span>  </li>
+                        <div className={styles["main-chat"]}>
+                            <ul>
+                                {chatHistory &&
+                                    chatHistory.map((item, index) => {
+                                        return item.id_receiver === userSelected.userID ?
+                                            <div className={styles["cont-msg-rec"]} key={index}>
+                                                <li onClick={(e) => deleteMessage(item.id_message)} className={styles["msg-rec"]} > {item.message} <span className={styles.spanlist}><p>{item.createdAt}</p></span>  </li>
+                                                {user.image === undefined ? <img src={`${urlImg}${newUser.image}`} alt="img profile"></img> : <img src={`${urlImg}${user.image}`} alt="img profile"></img>}
+                                            </div>
+                                            :
+                                            item.id_receiver === localStorage.getItem('idLoggedIn') && userSelected.userID === item.id_sender ?
+                                                <div className={styles["cont-msg-send"]} key={index}>
+                                                    <img src={`${urlImg}${userSelected.image}`} alt="img profile"></img>
+                                                    <li onClick={(e) => deleteMessage(item.id_message)} className={styles["msg-send"]} > {item.message} <span className={styles.spanlist}><p>{item.createdAt}</p></span>  </li>
+                                                </div>
+                                                :
+                                                ""
+                                    })
+                                }
+                                {comingMessage.map((item, index) => {
+                                    return item.idReceiver === userSelected.userID ?
+                                        <div className={styles["cont-msg-rec"]} key={index}>
+                                            <li className={styles["msg-rec"]} > {item.message} <span className={styles.spanlist}><p>{item.time}</p></span>  </li>
+                                            {user.image === undefined ? <img src={`${urlImg}${newUser.image}`} alt="img profile"></img> : <img src={`${urlImg}${user.image}`} alt="img profile"></img>}
                                         </div>
+
                                         :
-                                        ""
-                            })}
-                        </ul>
-                    </div>
-                    <div className={styles["foot-chat"]}>
-                        <div className={styles["chat-text"]}>
-                            <input type="text" value={message} name="messages" placeholder="Type your message.." onChange={(e) => setMessage(e.target.value)} />
-                            <button><img src={plusIcon} alt="" /></button>
-                            <button><img src={faceIcon} alt="" /></button>
-                            <button onClick={handleClick}><img src={squareIcon} alt="" /></button>
+                                        item.idReceiver === localStorage.getItem('idLoggedIn') && userSelected.userID === item.idSender ?
+                                            <div className={styles["cont-msg-send"]} key={index}>
+                                                <img src={`${urlImg}${userSelected.image}`} alt="img profile"></img>
+                                                <li className={styles["msg-send"]} > {item.message} <span className={styles.spanlist}><p>{item.time}</p></span>  </li>
+                                            </div>
+                                            :
+                                            ""
+                                })}
+                            </ul>
                         </div>
-                    </div>
-                </div>
+                        <div className={styles["foot-chat"]}>
+                            <div className={styles["chat-text"]}>
+                                <input type="text" value={message} name="messages" placeholder="Type your message.." onChange={(e) => setMessage(e.target.value)} />
+                                <button><img src={plusIcon} alt="" /></button>
+                                <button><img src={faceIcon} alt="" /></button>
+                                <button onClick={handleClick}><img src={squareIcon} alt="" /></button>
+                            </div>
+                        </div>
+                    </div>}
+
             </div>
         </div>
 

@@ -94,6 +94,17 @@
     height: min-content;
    
 }
+.msg-rec:hover, .msg-send:hover{
+    cursor: pointer;
+    
+}
+.msg-rec:hover{
+    border: 1px solid#7E98DF;
+}
+.msg-send:hover{
+    border: 1px solid #375ecc;
+}
+
 .cont-msg-send{
     justify-content: flex-start;
     align-items: flex-end;

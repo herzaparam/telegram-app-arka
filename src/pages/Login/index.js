@@ -34,9 +34,9 @@ function Login() {
                     confirmButtonColor: "#7e98df",
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        history.push("/chat");
+                        history.push("/chat-room");
                     } else {
-                        history.push("/chat");
+                        history.push("/chat-room");
                     }
                 });
             })

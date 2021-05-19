@@ -5,8 +5,7 @@ import { activate, reset } from '../../configs/redux/actions/user'
 
 import Swal from 'sweetalert2'
 import styles from '../../styles/Auth.module.css'
-import { back, passwordEye } from '../../assets/image'
-import VisibilityIcon from '@material-ui/icons/Visibility';
+import { back } from '../../assets/image'
 
 function ForgotPassword() {
     const useQuery = () => new URLSearchParams(useLocation().search);
