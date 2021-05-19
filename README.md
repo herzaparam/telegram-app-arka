@@ -47,12 +47,12 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 Here's some preview from my website :
 
 <div align="center">
-  <img width="420" src="https://github.com/herzaparam/telegram-app-arka/blob/master/src/assets/image/login.png" alt="Login page">
-  <img width="420" src="https://github.com/herzaparam/telegram-app-arka/blob/master/src/assets/image/forgot%20password.png" alt="Forgot Password page">
-  <img width="420" src="https://github.com/herzaparam/telegram-app-arka/blob/master/src/assets/image/chat-room.png" alt="Chat Room page">
-  <img width="420" src="https://github.com/herzaparam/telegram-app-arka/blob/master/src/assets/image/setting.png" alt="Setting tab">
-  <img width="420" src="https://github.com/herzaparam/telegram-app-arka/blob/master/src/assets/image/edit%20profile.png" alt="Edit Profile tab">
-  <img width="420" src="https://github.com/herzaparam/telegram-app-arka/blob/master/src/assets/image/delete%20message.png" alt="Delete Message tab">
+  <img width="400" src="https://github.com/herzaparam/telegram-app-arka/blob/master/src/assets/image/login.png" alt="Login page">
+  <img width="400" src="https://github.com/herzaparam/telegram-app-arka/blob/master/src/assets/image/forgot%20password.png" alt="Forgot Password page">
+  <img width="400" src="https://github.com/herzaparam/telegram-app-arka/blob/master/src/assets/image/chat-room.png" alt="Chat Room page">
+  <img width="400" src="https://github.com/herzaparam/telegram-app-arka/blob/master/src/assets/image/setting.png" alt="Setting tab">
+  <img width="400" src="https://github.com/herzaparam/telegram-app-arka/blob/master/src/assets/image/edit%20profile.png" alt="Edit Profile tab">
+  <img width="400" src="https://github.com/herzaparam/telegram-app-arka/blob/master/src/assets/image/delete%20message.png" alt="Delete Message tab">
 </div>
 
 ---
