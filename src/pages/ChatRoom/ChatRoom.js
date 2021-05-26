@@ -133,7 +133,7 @@ function ChatRoom({ socket }) {
             }
         })
     }
-
+    
     return (
 
         <div className="container-fluid">
@@ -177,14 +177,14 @@ function ChatRoom({ socket }) {
                                 {comingMessage.map((item, index) => {
                                     return item.id_receiver === userSelected.userID && item.id_sender === localStorage.getItem('idLoggedIn') ?
                                         <div className={styles["cont-msg-rec"]} key={index}>
-                                            <li className={styles["msg-rec"]} > {item.message} <span className={styles.spanlist}><p>{item.createdAt} </p></span>  </li>
+                                            <li onClick={(e)=>deleteMessage(item.id_message)} className={styles["msg-rec"]} > {item.message} <span className={styles.spanlist}><p>{item.createdAt} </p></span>  </li>
                                             {user.image === undefined ? <img src={`${urlImg}${newUser.image}`} alt="img profile"></img> : <img src={`${urlImg}${user.image}`} alt="img profile"></img>}
                                         </div>
                                         :
                                         item.id_receiver === localStorage.getItem('idLoggedIn') && userSelected.userID === item.id_sender ?
                                             <div className={styles["cont-msg-send"]} key={index}>
                                                 <img src={`${urlImg}${userSelected.image}`} alt="img profile"></img>
-                                                <li className={styles["msg-send"]} > {item.message} <span className={styles.spanlist}><p>{item.createdAt}</p></span>  </li>
+                                                <li onClick={(e)=>deleteMessage(item.id_message)} className={styles["msg-send"]} > {item.message} <span className={styles.spanlist}><p>{item.createdAt}</p></span>  </li>
                                             </div>
                                             :
                                             ""
