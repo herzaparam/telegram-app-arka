@@ -1,4 +1,15 @@
-<h1 align="center">Telegram</h1>
+<div align="center">
+  <img width="300" src="https://github.com/herzaparam/telegram-app-arka/blob/master/src/assets/image/telegram%20logo.png" alt="next.js logo">
+ </div> 
+<hr>
+ <div align="center">
+  <img width="100" src="https://github.com/herzaparam/zwallet-arka/blob/main/public/reactlogo.png" alt="react js">
+  <img width="100" src="https://github.com/herzaparam/zwallet-arka/blob/main/public/nodejs.png" alt="node js">
+  <img width="100" src="https://github.com/herzaparam/zwallet-arka/blob/main/public/expresslogo.png" alt="express js">
+</div>
+<hr>
+<br>
+
 The website-based chat app, developed using socket.io, react.js, and express.js. After registration and login, users can private chat with other users or join group chats. Users can also change personal information such as phone number, profile picture, bio, name, and user name.
 
 ## Package 
@@ -47,12 +58,12 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 Here's some preview from my website :
 
 <div align="center">
-  <img width="400" src="https://github.com/herzaparam/telegram-app-arka/blob/master/src/assets/image/login.png" alt="Login page">
-  <img width="400" src="https://github.com/herzaparam/telegram-app-arka/blob/master/src/assets/image/forgot%20password.png" alt="Forgot Password page">
-  <img width="400" src="https://github.com/herzaparam/telegram-app-arka/blob/master/src/assets/image/chat-room.png" alt="Chat Room page">
-  <img width="400" src="https://github.com/herzaparam/telegram-app-arka/blob/master/src/assets/image/setting.png" alt="Setting tab">
-  <img width="400" src="https://github.com/herzaparam/telegram-app-arka/blob/master/src/assets/image/edit%20profile.png" alt="Edit Profile tab">
-  <img width="400" src="https://github.com/herzaparam/telegram-app-arka/blob/master/src/assets/image/delete%20message.png" alt="Delete Message tab">
+  <img width="400" src="https://github.com/herzaparam/telegram-app-arka/blob/master/src/assets/image/login(rescale).png" alt="Login page">
+  <img width="400" src="https://github.com/herzaparam/telegram-app-arka/blob/master/src/assets/image/forgot%20password(rescale).png" alt="Forgot Password page">
+  <img width="400" src="https://github.com/herzaparam/telegram-app-arka/blob/master/src/assets/image/chat-room(rescale).png" alt="Chat Room page">
+  <img width="400" src="https://github.com/herzaparam/telegram-app-arka/blob/master/src/assets/image/setting(rescale).png" alt="Setting tab">
+  <img width="400" src="https://github.com/herzaparam/telegram-app-arka/blob/master/src/assets/image/edit%20profile(rescale).png" alt="Edit Profile tab">
+  <img width="400" src="https://github.com/herzaparam/telegram-app-arka/blob/master/src/assets/image/delete%20message(rescale).png" alt="Delete Message tab">
 </div>
 
 ---
@@ -67,5 +78,5 @@ visit [here](https://github.com/herzaparam/telegram-api-arka)
 ## Contributor
 [Herza Paramayudhanto](https://github.com/herzaparam)
 
-contact :
-herzaparam@gmail.com
+### contact :
+If you want to contact me you can reach me at herzaparam@gmail.com
