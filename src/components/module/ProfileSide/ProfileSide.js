@@ -20,7 +20,7 @@ function ProfileSide() {
         phone_number: "",
         username: "",
         bio: "",
-        image: null
+        image: ""
     })
     const [edit, setEdit] = useState(false);
 
@@ -70,12 +70,21 @@ function ProfileSide() {
                     phone_number: "",
                     username: "",
                     bio: "",
-                    image: null
+                    image: ""
                 })
                 setEdit(false)
                 dispatch(updateUser())
             })
             .catch((err) => {
+                if(err.response.status === 400){
+                    return Swal.fire({
+                        title: "Error!",
+                        text: "You need to put image to update profile",
+                        icon: "error",
+                        confirmButtonText: "Ok",
+                        confirmButtonColor: "#6a4029",
+                    });
+                }
                 Swal.fire({
                     title: "Error!",
                     text: err.response.data.message,
